@@ -20,6 +20,8 @@
 <script>
 import {ref} from "vue";
 import {useRouter} from "vue-router";
+import {db} from "../firebase/config";
+import { collection, doc, setDoc, addDoc } from "firebase/firestore"; 
 export default {
     setup(){
         let title = ref("");
@@ -36,18 +38,16 @@ export default {
         }
 
         let addPost = async() =>{
-            await fetch("http://localhost:3000/posts/", {
-                method : "POST",
-                headers : {
-                    "Content-type" : "application/json"
-                },
-                body : JSON.stringify({
-                    title : title.value,
-                    body : body.value,
-                    tags : tags.value
-                })
-            });
-            route.push("/");
+          let newPost = {
+            title : title.value,
+            body : body.value,
+            tags : tags.value
+          };
+           // Add a new document in collection "cities"
+          // await setDoc(doc(db, "post"), newPost);
+          await addDoc(collection(db, "post"), newPost);
+
+          route.push("/");
         }
 
         return {title, body, tag, tags, handleClick, addPost};
@@ -111,3 +111,16 @@ form {
     font-size: 14px;
   }
 </style>
+
+// add post using json
+//  await fetch("http://localhost:3000/posts/", {
+//                 method : "POST",
+//                 headers : {
+//                     "Content-type" : "application/json"
+//                 },
+//                 body : JSON.stringify({
+//                     title : title.value,
+//                     body : body.value,
+//                     tags : tags.value
+//                 })
+//             });
