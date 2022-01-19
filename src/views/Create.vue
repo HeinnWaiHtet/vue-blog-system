@@ -38,7 +38,6 @@ export default {
         }
 
         let addPost = async() =>{
-          console.log(timestamp);
           let newPost = {
             title : title.value,
             body : body.value,
@@ -47,6 +46,7 @@ export default {
           };
            // Add a new document in collection "cities"
           // await setDoc(doc(db, "post"), newPost);
+
           await addDoc(collection(db, "post"), newPost);
 
           route.push("/");

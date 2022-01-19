@@ -14,6 +14,9 @@ let getPosts = () => {
       );
       let querySnapshot = await getDocs(queryData);
       // let querySnapshot = await getDocs(collection(db, "post"));
+
+      // get data in firebase v-8
+      // await db.collection("post").orderBy("created_at","desc").get()
       querySnapshot.forEach((doc) => {
         posts.value.push({ id: doc.id, ...doc.data() });
       });
