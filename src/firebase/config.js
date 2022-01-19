@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, Timestamp } from "firebase/firestore";
 
 // app's Firebase configuration
 const firebaseConfig = {
@@ -15,5 +15,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 let db = getFirestore();
+// let timestamp = firebase.firestore.FieldValue.serverTimestamp;
+let timestamp = Timestamp.now();
 
-export { db };
+export { db, timestamp };

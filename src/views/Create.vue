@@ -20,7 +20,7 @@
 <script>
 import {ref} from "vue";
 import {useRouter} from "vue-router";
-import {db} from "../firebase/config";
+import {db, timestamp} from "../firebase/config";
 import { collection, doc, setDoc, addDoc } from "firebase/firestore"; 
 export default {
     setup(){
@@ -38,10 +38,12 @@ export default {
         }
 
         let addPost = async() =>{
+          console.log(timestamp);
           let newPost = {
             title : title.value,
             body : body.value,
-            tags : tags.value
+            tags : tags.value,
+            created_at: timestamp
           };
            // Add a new document in collection "cities"
           // await setDoc(doc(db, "post"), newPost);
